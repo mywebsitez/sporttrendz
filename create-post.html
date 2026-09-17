@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Post - SportTrendz</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="container nav">
+
+        <div class="logo">
+            Sport<span>Zone</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#football">Football</a>
+            <a href="index.html#basketball">Basketball</a>
+            <a href="index.html#tennis">Tennis</a>
+            <a href="create-post.html">Create Post</a>
+        </nav>
+
+    </div>
+</header>
+
+
+<section class="create-section">
+
+    <div class="create-container">
+
+        <h1>Create Sports Post</h1>
+
+        <p class="create-intro">
+            Write and publish a new sports article on your blog.
+        </p>
+
+
+        <form id="postForm">
+
+            <label for="title">
+                Post Title
+            </label>
+
+            <input
+                type="text"
+                id="title"
+                placeholder="Enter your article title"
+                required
+            >
+
+
+            <label for="category">
+                Category
+            </label>
+
+            <select id="category" required>
+
+                <option value="">
+                    Select category
+                </option>
+
+                <option value="Football">
+                    Football
+                </option>
+
+                <option value="Basketball">
+                    Basketball
+                </option>
+
+                <option value="Tennis">
+                    Tennis
+                </option>
+
+                <option value="Motorsport">
+                    Motorsport
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <label for="image">
+                Image URL
+            </label>
+
+            <input
+                type="url"
+                id="image"
+                placeholder="https://example.com/image.jpg"
+            >
+
+
+            <label for="content">
+                Article Content
+            </label>
+
+            <textarea
+                id="content"
+                rows="12"
+                placeholder="Write your sports article here..."
+                required
+            ></textarea>
+
+
+            <button type="submit" class="publish-btn">
+                Publish Post
+            </button>
+
+        </form>
+
+
+        <div id="message"></div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="container footer-content">
+
+        <div>
+            <div class="logo">
+                Sport<span>Zone</span>
+            </div>
+
+            <p>
+                Your daily source for sports news and updates.
+            </p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="create-post.html">
+                Create Post
+            </a>
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        <p>
+            © 2026 SportZone. All Rights Reserved.
+        </p>
+    </div>
+
+</footer>
+
+
+<script>
+
+document
+    .getElementById("postForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const title =
+            document.getElementById("title").value;
+
+        const category =
+            document.getElementById("category").value;
+
+        const image =
+            document.getElementById("image").value;
+
+        const content =
+            document.getElementById("content").value;
+
+
+        const post = {
+
+            id: Date.now(),
+
+            title: title,
+
+            category: category,
+
+            image: image,
+
+            content: content,
+
+            date: new Date().toLocaleDateString()
+
+        };
+
+
+        let posts =
+            JSON.parse(
+                localStorage.getItem("sportPosts")
+            ) || [];
+
+
+        posts.unshift(post);
+
+
+        localStorage.setItem(
+            "sportPosts",
+            JSON.stringify(posts)
+        );
+
+
+        document.getElementById("message").innerHTML = `
+            <div class="success-message">
+                Post published successfully!
+                <br><br>
+                <a href="index.html">
+                    View your post
+                </a>
+            </div>
+        `;
+
+
+        document.getElementById("postForm").reset();
+
+    });
+
+</script>
+
+</body>
+</html>
+
